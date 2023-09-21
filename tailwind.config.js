@@ -9,27 +9,42 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        shake: 'shake 2.4s cubic-bezier(.36,.07,.19,.97) both',
+        shake: 'shake 3.4s infinite cubic-bezier(.36,.07,.19,.97) both ',
       },
       keyframes: {
         shake: {
           '0%': {
             transform: 'translateX(0)',
           },
+          '5%': {
+            transform: 'translateY(-9px) scale(110%)',
+          },
+          '10%': {
+            transform: 'translateY(-9px) scale(110%) rotate(17deg)',
+          },
+          '15%': {
+            transform: 'translateY(-9px) scale(110%) rotate(-17deg)',
+          },
+          '20%': {
+            transform: 'translateY(-9px) scale(110%) rotate(17deg)',
+          },
           '25%': {
-            transform: 'translateY(-9px) scale(150%)',
+            transform: 'translateY(-9px) scale(110%) rotate(-17deg)',
+          },
+          '30%': {
+            transform: 'translateY(-9px) scale(110%) rotate(17deg)',
           },
           '35%': {
-            transform: 'translateY(-9px) scale(150%) rotate(17deg)',
+            transform: 'translateY(-9px) scale(110%) rotate(-17deg)',
           },
-          '55%': {
-            transform: 'translateY(-9px) scale(150%) rotate(-17deg)',
+          '40%': {
+            transform: 'translateY(-9px) scale(110%) rotate(17deg)',
           },
-          '65%': {
-            transform: 'translateY(-9px) scale(150%) rotate(17deg)',
+          '45%': {
+            transform: 'translateY(-9px) scale(110%) rotate(-17deg)',
           },
-          '75%': {
-            transform: 'translateY(-9px) scale(150%) rotate(-17deg)',
+          '50%': {
+            transform: 'translateY(0) rotate(0)',
           },
           '100%': {
             transform: 'translateY(0) rotate(0)',
