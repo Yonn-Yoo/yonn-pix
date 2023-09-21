@@ -14,8 +14,8 @@ export default function HelloAnimation() {
     <div>
       <Lottie
         options={defaultOptions}
-        height={350}
-        width={250}
+        height={300}
+        width={200}
         isClickToPauseDisabled
       />
     </div>
