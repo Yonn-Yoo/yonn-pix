@@ -64,11 +64,11 @@ export default function WelcomeModal() {
               <Dialog.Panel className="w-screen md:w-full md:max-w-md transform overflow-hidden rounded-3xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h2"
-                  className="text-lg md:text-xl font-semibold leading-6 text-zinc-900 text-center"
+                  className="text-lg md:text-xl font-semibold leading-6 text-zinc-900 text-center flex justify-center items-center"
                 >
                   Welcome to{' '}
                   <strong className="text-blue-500 font-bold">YonnPix! </strong>
-                  👋🏻
+                  <i className="inline-block animate-shake mb-1 ml-1">👋🏻</i>
                 </Dialog.Title>
                 <HelloAnimation />
                 <div className="mt-4 flex flex-col">
