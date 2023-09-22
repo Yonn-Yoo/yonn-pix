@@ -1,13 +1,14 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Dispatch, Fragment, SetStateAction, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { searchPhotos } from '../../api/service';
 import { filterArray } from '../../array/searchArrays';
 import { photoArr } from '../../photoArray';
-import { searchFilter } from '../../recoil/atom';
+import { loader, searchFilter } from '../../recoil/atom';
 import CheckIcon from '../../svg/CheckIcon';
 import ChevronDownIcon from '../../svg/ChevronDownIcon';
+import LoaderAnimation from '../animation/LoaderAnimation';
 
 export default function ImageSection({
   imageList,
@@ -16,41 +17,51 @@ export default function ImageSection({
   imageList: string[];
   setImageList: Dispatch<SetStateAction<string[]>>;
 }) {
+  const isLoading = useRecoilValue(loader);
+
   return (
     <section className="relative">
       <SearchOrderFilter setImageList={setImageList} />
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{ 350: 2, 500: 3, 900: 4, 1200: 5 }}
-      >
-        <Masonry>
-          {imageList.map((url, idx) => (
-            <div className="relative m-2 rounded-md group overflow-hidden cursor-pointer">
-              <img
-                key={`key2-${idx}`}
-                className="rounded-md group-hover:scale-105 duration-500 ease-out"
-                loading="lazy"
-                draggable={false}
-                src={url}
-                alt="photo"
-              />
-              <div className="absolute left-0 top-0 w-full h-full group-hover:bg-black/20 duration-300 ease-out" />
-            </div>
-          ))}
-          {photoArr.map(({ path }, idx) => (
-            <div className="relative m-2 rounded-md group overflow-hidden cursor-pointer">
-              <img
+      {isLoading ? (
+        <LoaderAnimation />
+      ) : (
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 350: 2, 500: 3, 900: 4, 1200: 5 }}
+        >
+          <Masonry>
+            {imageList.map((url, idx) => (
+              <div
+                key={`image-${idx}`}
+                className="relative m-2 rounded-md group overflow-hidden cursor-pointer"
+              >
+                <img
+                  className="rounded-md group-hover:scale-105 duration-500 ease-out"
+                  loading="lazy"
+                  draggable={false}
+                  src={url}
+                  alt="photo"
+                />
+                <div className="absolute left-0 top-0 w-full h-full group-hover:bg-black/20 duration-300 ease-out" />
+              </div>
+            ))}
+            {photoArr.map(({ path }, idx) => (
+              <div
                 key={`key-${idx}`}
-                className="rounded-md group-hover:scale-105 duration-500 ease-out"
-                loading="lazy"
-                draggable={false}
-                src={path}
-                alt="photo"
-              />
-              <div className="absolute left-0 top-0 w-full h-full group-hover:bg-black/20 duration-300 ease-out" />
-            </div>
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+                className="relative m-2 rounded-md group overflow-hidden cursor-pointer"
+              >
+                <img
+                  className="rounded-md group-hover:scale-105 duration-500 ease-out"
+                  loading="lazy"
+                  draggable={false}
+                  src={path}
+                  alt="photo"
+                />
+                <div className="absolute left-0 top-0 w-full h-full group-hover:bg-black/20 duration-300 ease-out" />
+              </div>
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      )}
     </section>
   );
 }
@@ -61,6 +72,7 @@ function SearchOrderFilter({
   setImageList: Dispatch<SetStateAction<string[]>>;
 }) {
   const [searchCondition, setSearchCondition] = useRecoilState(searchFilter);
+  const setIsLoading = useSetRecoilState(loader);
 
   const updateOrder = (value: 'relevant' | 'latest') => {
     setSearchCondition((prev) => ({
@@ -73,11 +85,13 @@ function SearchOrderFilter({
     if (!searchCondition.query) {
       return;
     }
+    setIsLoading(true);
     searchPhotos(searchCondition)
       .then((res) =>
         setImageList(res.data.results.map((image: any) => image.urls.small))
       )
-      .catch(console.log);
+      .catch(console.log)
+      .finally(() => setIsLoading(false));
   }, [searchCondition.order_by]);
 
   return (
