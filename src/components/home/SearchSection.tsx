@@ -1,12 +1,10 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
-import { searchPhotos } from '../../api/service';
 import { colorArray } from '../../array/searchArrays';
 import useScroll from '../../hooks/useScroll';
 import { searchFilter } from '../../recoil/atom';
-import CameraIcon from '../../svg/CameraIcon';
-import MagnifierIcon from '../../svg/MagnifierIcon';
 import PhotoAnimation from '../animation/PhotoAnimation';
+import SearchBar from '../common/SearchBar';
 
 export default function SearchSection({
   setImageList,
@@ -16,23 +14,11 @@ export default function SearchSection({
   const [searchCondition, setSearchCondition] = useRecoilState(searchFilter);
   const scrollPosition = useScroll();
 
-  useEffect(() => {
-    console.log(scrollPosition);
-  }, [scrollPosition]);
-
   const handleOnChange = (value: string | null, key: string) => {
     setSearchCondition((prev) => ({
       ...prev,
       [key]: value,
     }));
-  };
-
-  const handleSearch = () => {
-    searchPhotos(searchCondition)
-      .then((res) =>
-        setImageList(res.data.results.map((image: any) => image.urls.small))
-      )
-      .catch(console.log);
   };
 
   return (
@@ -44,33 +30,7 @@ export default function SearchSection({
         <div className="w-full flex flex-col justify-between p-5 md:p-4">
           <h3 className="mb-2 text-2xl font-bold">YonnPix</h3>
           <p className="mb-3 font-normal text-zinc800">Image search website</p>
-
-          <div className="flex items-center w-full">
-            <div className="relative w-full">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <CameraIcon className="w-5 h-5 md:w-6 md:h-6" />
-              </div>
-              <input
-                type="text"
-                spellCheck={false}
-                className="border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-none block w-full pl-9 md:pl-10 p-2.5"
-                placeholder="Search images.."
-                onChange={(e) => handleOnChange(e.target.value, 'query')}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                value={searchCondition.query}
-              />
-            </div>
-            <button
-              onClick={handleSearch}
-              disabled={!searchCondition.query}
-              className={`flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 duration-150 ease-out ${
-                !searchCondition.query && '!bg-zinc-300 cursor-not-allowed'
-              } `}
-            >
-              <MagnifierIcon />
-              Search
-            </button>
-          </div>
+          <SearchBar />
           <div className="flex flex-wrap gap-3 md:gap-2 mt-5 text-xs font-semibold">
             {colorArray.map(({ label, value, color }, idx) => (
               <button
