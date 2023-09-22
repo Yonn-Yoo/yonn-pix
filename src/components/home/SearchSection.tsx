@@ -50,12 +50,16 @@ export default function SearchSection({
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-none block w-full pl-10 p-2.5"
                 placeholder="Search images with keyword."
                 onChange={(e) => handleOnChange(e.target.value, 'query')}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                 value={searchCondition.query}
               />
             </div>
             <button
               onClick={handleSearch}
-              className="flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:outline-none duration-150 ease-out"
+              disabled={!searchCondition.query}
+              className={`flex items-center py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 duration-150 ease-out ${
+                !searchCondition.query && '!bg-zinc-300 cursor-not-allowed'
+              } `}
             >
               <MagnifierIcon />
               Search
