@@ -48,13 +48,13 @@ export default function SearchSection({
           <div className="flex items-center w-full">
             <div className="relative w-full">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <CameraIcon className="w-6 h-6" />
+                <CameraIcon className="w-5 h-5 md:w-6 md:h-6" />
               </div>
               <input
                 type="text"
                 spellCheck={false}
-                className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-none block w-full pl-10 p-2.5"
-                placeholder="Search images with keyword."
+                className="border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-none block w-full pl-9 md:pl-10 p-2.5"
+                placeholder="Search images.."
                 onChange={(e) => handleOnChange(e.target.value, 'query')}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                 value={searchCondition.query}

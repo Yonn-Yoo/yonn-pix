@@ -70,6 +70,9 @@ function SearchOrderFilter({
   };
 
   useEffect(() => {
+    if (!searchCondition.query) {
+      return;
+    }
     searchPhotos(searchCondition)
       .then((res) =>
         setImageList(res.data.results.map((image: any) => image.urls.small))
