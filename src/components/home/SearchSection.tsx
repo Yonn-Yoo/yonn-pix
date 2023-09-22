@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import { useRecoilState } from 'recoil';
 import { searchPhotos } from '../../api/service';
-import { colorArray } from '../../array/colorArray';
+import { colorArray } from '../../array/searchArrays';
+import { searchFilter } from '../../recoil/atom';
 import CameraIcon from '../../svg/CameraIcon';
 import MagnifierIcon from '../../svg/MagnifierIcon';
-import { searchReqBodyType } from '../../types/reqBody';
 import PhotoAnimation from '../animation/PhotoAnimation';
 
 export default function SearchSection({
@@ -11,9 +12,7 @@ export default function SearchSection({
 }: {
   setImageList: Dispatch<SetStateAction<string[]>>;
 }) {
-  const [searchCondition, setSearchCondition] = useState<searchReqBodyType>({
-    query: '',
-  });
+  const [searchCondition, setSearchCondition] = useRecoilState(searchFilter);
 
   const handleOnChange = (value: string | null, key: string) => {
     setSearchCondition((prev) => ({
@@ -31,7 +30,7 @@ export default function SearchSection({
   };
 
   return (
-    <section className="w-full md:w-[80%] mx-auto mb-5 md:mb-10">
+    <section className="w-full md:w-[80%] mx-auto mb-16 md:mb-20">
       <div className="w-full flex flex-col md:items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row">
         <div className="w-full md:h-auto md:w-48">
           <PhotoAnimation />
@@ -51,6 +50,7 @@ export default function SearchSection({
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-none block w-full pl-10 p-2.5"
                 placeholder="Search images with keyword."
                 onChange={(e) => handleOnChange(e.target.value, 'query')}
+                value={searchCondition.query}
               />
             </div>
             <button
@@ -61,7 +61,7 @@ export default function SearchSection({
               Search
             </button>
           </div>
-          <div className="flex flex-wrap gap-3 md:gap-2 mt-3 text-xs font-semibold">
+          <div className="flex flex-wrap gap-3 md:gap-2 mt-5 text-xs font-semibold">
             {colorArray.map(({ label, value, color }, idx) => (
               <button
                 key={`colorBadge-${idx}`}

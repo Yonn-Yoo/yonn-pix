@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <main className="max-w-7xl w-full mx-auto">
       <SearchSection setImageList={setImageList} />
-      <ImageSection imageList={imageList} />
+      <ImageSection imageList={imageList} setImageList={setImageList} />
     </main>
   );
 }

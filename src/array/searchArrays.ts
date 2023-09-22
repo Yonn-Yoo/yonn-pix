@@ -64,3 +64,17 @@ export const colorArray: { label: string; value: colorType; color: string }[] =
       color: 'ring-indigo-100 bg-indigo-100 text-indigo-800',
     },
   ];
+
+export const filterArray: {
+  label: 'Relevant' | 'Latest';
+  value: 'relevant' | 'latest';
+}[] = [
+  {
+    label: 'Relevant',
+    value: 'relevant',
+  },
+  {
+    label: 'Latest',
+    value: 'latest',
+  },
+];

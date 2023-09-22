@@ -14,8 +14,8 @@ export default function PhotoAnimation() {
     <div>
       <Lottie
         options={defaultOptions}
-        height={200}
-        width={200}
+        height={180}
+        width={180}
         isClickToPauseDisabled
       />
     </div>

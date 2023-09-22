@@ -14,6 +14,6 @@ export type colorType =
 
 export type searchReqBodyType = {
   query: string;
-  order_by?: 'latest' | 'relevant';
+  order_by: 'latest' | 'relevant';
   color?: colorType;
 };
