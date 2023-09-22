@@ -15,7 +15,7 @@ export default function SearchSection({
     query: '',
   });
 
-  const handleOnChange = (value: string, key: string) => {
+  const handleOnChange = (value: string | null, key: string) => {
     setSearchCondition((prev) => ({
       ...prev,
       [key]: value,
@@ -61,17 +61,17 @@ export default function SearchSection({
               Search
             </button>
           </div>
-          <div className="flex mt-3 text-xs font-semibold space-x-2">
+          <div className="flex flex-wrap gap-3 md:gap-2 mt-3 text-xs font-semibold">
             {colorArray.map(({ label, value, color }, idx) => (
-              <span
+              <button
                 key={`colorBadge-${idx}`}
                 onClick={() => handleOnChange(value, 'color')}
-                className={`${color} px-2.5 py-0.5 rounded hover:opacity-70 duration-150 ease-out cursor-pointer ring-1 ${
-                  value === searchCondition.color && 'ring-[3px] !ring-blue-400'
+                className={`${color} px-3 md:px-2.5 py-1 rounded hover:opacity-70 duration-150 ease-out cursor-pointer ring-1 ${
+                  value === searchCondition.color && 'ring-2 !ring-blue-500'
                 }`}
               >
                 {label}
-              </span>
+              </button>
             ))}
           </div>
         </div>
