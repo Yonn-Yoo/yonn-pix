@@ -61,7 +61,7 @@ export default function WelcomeModal() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 md:scale-90 max-md:translate-y-72"
             >
-              <Dialog.Panel className="w-screen md:w-full md:max-w-md transform overflow-hidden rounded-3xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-screen md:w-full md:max-w-md transform overflow-hidden rounded-3xl max-md:rounded-b-none bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h2"
                   className="text-lg md:text-xl font-semibold leading-6 text-zinc-900 text-center flex justify-center items-center"

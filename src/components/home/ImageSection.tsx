@@ -1,11 +1,13 @@
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { photoArr } from '../../photoArray';
 
-export default function PhotoSection({ photoList }: { photoList: string[] }) {
+export default function ImageSection({ imageList }: { imageList: string[] }) {
   return (
-    <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 4, 900: 5 }}>
+    <ResponsiveMasonry
+      columnsCountBreakPoints={{ 350: 2, 500: 3, 900: 4, 1200: 5 }}
+    >
       <Masonry>
-        {photoList.map((url, idx) => (
+        {imageList.map((url, idx) => (
           <div className="relative m-2 rounded-lg group overflow-hidden cursor-pointer">
             <img
               key={`key2-${idx}`}
