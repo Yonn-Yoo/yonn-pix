@@ -6,7 +6,7 @@ export default function ArrowUpIcon() {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="w-5 h-5 md:w-6 md:h-6"
+      className="w-5 h-5 md:w-6 md:h-6 group-hover:-translate-y-1 duration-150"
     >
       <path
         strokeLinecap="round"
