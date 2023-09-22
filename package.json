@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-lottie": "^1.2.3",
     "react-responsive-masonry": "^2.1.7",
+    "recoil": "^0.7.7",
     "typescript": "5.2.2",
     "universal-cookie": "^4.0.4"
   },
