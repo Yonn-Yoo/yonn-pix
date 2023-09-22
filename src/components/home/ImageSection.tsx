@@ -32,7 +32,7 @@ export default function ImageSection({
             {imageList.map((url, idx) => (
               <div
                 key={`image-${idx}`}
-                className="relative m-2 rounded-md group overflow-hidden cursor-pointer"
+                className="relative m-1 md:m-2 rounded-md group overflow-hidden cursor-pointer"
               >
                 <img
                   className="rounded-md group-hover:scale-105 duration-500 ease-out"
