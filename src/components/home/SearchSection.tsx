@@ -1,18 +1,11 @@
-import { Dispatch, SetStateAction } from 'react';
 import { useRecoilState } from 'recoil';
 import { colorArray } from '../../array/searchArrays';
-import useScroll from '../../hooks/useScroll';
 import { searchFilter } from '../../recoil/atom';
 import PhotoAnimation from '../animation/PhotoAnimation';
 import SearchBar from '../common/SearchBar';
 
-export default function SearchSection({
-  setImageList,
-}: {
-  setImageList: Dispatch<SetStateAction<string[]>>;
-}) {
+export default function SearchSection() {
   const [searchCondition, setSearchCondition] = useRecoilState(searchFilter);
-  const scrollPosition = useScroll();
 
   const handleOnChange = (value: string | null, key: string) => {
     setSearchCondition((prev) => ({
