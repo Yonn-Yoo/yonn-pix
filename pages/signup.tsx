@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { emailRegex, passwordRegex } from '../src/constants/regex';
 import { registerInfoType } from '../src/types/reqBody';
@@ -11,6 +12,7 @@ export default function SignUp() {
     firstName: '',
     lastName: '',
   });
+  const router = useRouter();
 
   useEffect(() => {
     const { password } = registerInfo;
@@ -59,7 +61,7 @@ export default function SignUp() {
   return (
     <>
       <div
-        className="fixed inset-0 w-screen h-screen bg-cover bg-center -z-10 opacity-80 max-sm:hidden"
+        className="fixed inset-0 w-screen h-screen bg-cover bg-center -z-10 opacity-40 max-sm:hidden"
         style={{ backgroundImage: 'url(/blue-blur.jpg)' }}
       />
       <section>
@@ -231,7 +233,10 @@ export default function SignUp() {
           </button>
           <div className="flex space-x-1 justify-end text-sm mt-8">
             <span className="text-zinc-500">Signed up already?</span>
-            <button className="text-blue-500 underline hover:text-blue-400">
+            <button
+              onClick={() => router.push('/')}
+              className="text-blue-500 underline hover:text-blue-400"
+            >
               Go to Home
             </button>
           </div>

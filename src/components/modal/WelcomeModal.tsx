@@ -18,7 +18,7 @@ export default function WelcomeModal() {
     const date = new Date();
     const expireDate = new Date(
       date.getFullYear(),
-      date.getMonth() + 1,
+      date.getMonth(),
       date.getDate(),
       23,
       59,
