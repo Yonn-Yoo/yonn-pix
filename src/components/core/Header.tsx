@@ -4,15 +4,19 @@ import CameraIcon from '../../svg/CameraIcon';
 import SearchBar from '../common/SearchBar';
 import LoginModal from '../modal/LoginModal';
 
-
 export default function Header() {
   const [loginModal, setLoginModal] = useState(false);
   const router = useRouter();
-  return (
 
+  const isSignupPage = router.pathname === '/signup';
+  return (
     <>
       <LoginModal isOpen={loginModal} closeModal={() => setLoginModal(false)} />
-      <header className="fixed top-0 z-10 w-screen h-14 md:h-16 px-4 md:px-5 flex justify-between items-center border-b border-zinc-300 bg-white/80 backdrop-blur-sm">
+      <header
+        className={`${
+          isSignupPage && 'hidden'
+        } fixed top-0 z-10 w-screen h-14 md:h-16 px-4 md:px-5 flex justify-between items-center border-b border-zinc-300 bg-white/80 backdrop-blur-sm`}
+      >
         <button
           onClick={() => router.push('/')}
           className="flex items-center space-x-1"
@@ -33,6 +37,5 @@ export default function Header() {
         </button>
       </header>
     </>
-
   );
 }

@@ -1,9 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import GoogleLogo from '../../svg/GoogleLogo';
-
-const buttonStyle =
-  'max-md:text-sm flex justify-center rounded-md border border-transparent font-medium focus:outline-none duration-150 ease-out';
 
 export default function LoginModal({
   isOpen,
@@ -12,6 +10,13 @@ export default function LoginModal({
   isOpen: boolean;
   closeModal: () => void;
 }) {
+  const router = useRouter();
+
+  const navigateToSignUp = () => {
+    closeModal();
+    router.push('/signup');
+  };
+
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -109,7 +114,10 @@ export default function LoginModal({
                   <span className="text-zinc-500">
                     Don't have an account yet?
                   </span>
-                  <button className="text-blue-500 hover:text-blue-400 duration-150 ease-out">
+                  <button
+                    onClick={navigateToSignUp}
+                    className="text-blue-500 hover:text-blue-400 duration-150 ease-out"
+                  >
                     Sign up here
                   </button>
                 </div>
