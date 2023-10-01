@@ -63,7 +63,7 @@ export default function SignUp() {
         style={{ backgroundImage: 'url(/blue-blur.jpg)' }}
       />
       <section>
-        <h1 className="text-xl md:text-3xl text-blue-600 mb-10 md:mb-14 text-center">
+        <h1 className="text-xl md:text-3xl text-blue-600 mb-8 md:mb-14 text-center">
           Create your account
         </h1>
         <div className="max-w-xl mx-auto p-0 md:p-8 rounded-xl bg-white/70 backdrop-blur-2xl">
@@ -229,6 +229,12 @@ export default function SignUp() {
           >
             Sign Up
           </button>
+          <div className="flex space-x-1 justify-end text-sm mt-8">
+            <span className="text-zinc-500">Signed up already?</span>
+            <button className="text-blue-500 underline hover:text-blue-400">
+              Go to Home
+            </button>
+          </div>
         </div>
       </section>
     </>
