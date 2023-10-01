@@ -17,3 +17,14 @@ export type searchReqBodyType = {
   order_by: 'latest' | 'relevant';
   color?: colorType;
 };
+
+export interface signUpInfoType {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface registerInfoType extends signUpInfoType {
+  confirmPassword: string;
+}
