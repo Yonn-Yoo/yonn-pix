@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { searchReqBodyType } from '../types/reqBody';
-import { ImageDataType } from '../types/type';
+import { ImageDataType, ModalType } from '../types/type';
 
 export const searchFilter = atom<searchReqBodyType>({
   key: 'searchFilter',
@@ -18,4 +18,12 @@ export const loader = atom({
 export const images = atom<ImageDataType[]>({
   key: 'images',
   default: [],
+});
+
+export const modalAtom = atom<ModalType>({
+  key: 'modalAtom',
+  default: {
+    isOpen: false,
+    type: null,
+  },
 });

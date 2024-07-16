@@ -161,3 +161,8 @@ export interface Social {
   twitter_username: null | string;
   paypal_email: null;
 }
+
+export type ModalType = {
+  isOpen: boolean;
+  type: 'login' | 'detail' | null;
+};

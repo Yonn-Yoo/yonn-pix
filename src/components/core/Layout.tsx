@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { ReactNode } from 'react';
-import WelcomeModal from '../modal/WelcomeModal';
+import ModalProvider from '../modal/ModalProvider';
 import Header from './Header';
 import TopButton from './TopButton';
 
@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <WelcomeModal />
+      <ModalProvider />
       <Header />
       <main className="mt-14 md:mt-20 p-5 md:p-8">{children}</main>
       <TopButton />
