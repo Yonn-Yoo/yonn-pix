@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { searchReqBodyType } from '../types/reqBody';
+import { ImageDataType } from '../types/type';
 
 export const searchFilter = atom<searchReqBodyType>({
   key: 'searchFilter',
@@ -14,7 +15,7 @@ export const loader = atom({
   default: false,
 });
 
-export const images = atom({
+export const images = atom<ImageDataType[]>({
   key: 'images',
-  default: ['/tmp/1.jpg'],
+  default: [],
 });

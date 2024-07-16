@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { searchPhotos } from '../../api/service';
 import useScroll from '../../hooks/useScroll';
@@ -24,10 +25,12 @@ export default function SearchBar({ isHeader }: { isHeader?: boolean }) {
       .finally(() => setIsLoading(false));
   };
 
-  const handleOnChange = (value: string | null, key: string) => {
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
     setSearchCondition((prev) => ({
       ...prev,
-      [key]: value,
+      [name]: value,
     }));
   };
 
@@ -47,10 +50,11 @@ export default function SearchBar({ isHeader }: { isHeader?: boolean }) {
         </div>
         <input
           type="text"
+          name="query"
           spellCheck={false}
           className="border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-none block w-full pl-2 md:pl-10 p-2.5"
           placeholder="Search images.."
-          onChange={(e) => handleOnChange(e.target.value, 'query')}
+          onChange={handleOnChange}
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
           value={searchCondition.query}
         />
