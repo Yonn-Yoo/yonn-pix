@@ -25,6 +25,7 @@ export interface ImageDataType {
   location: LocationType;
   views: number;
   downloads: number;
+  profile_image: { large: string; medium: string; small: string };
 }
 
 export interface AlternativeSlugsType {

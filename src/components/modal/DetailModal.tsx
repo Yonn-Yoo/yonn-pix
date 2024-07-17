@@ -1,7 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
-import GoogleLogo from '../../svg/GoogleLogo';
+import { useRecoilValue } from 'recoil';
+import { modalAtom } from '../../recoil/atom';
+import { ImageDataType } from '../../types/type';
+import Dropdown from '../common/Dropdown';
 
 export default function DetailModal({
   isOpen,
@@ -10,11 +13,38 @@ export default function DetailModal({
   isOpen: boolean;
   closeModal: () => void;
 }) {
+  const { data } = useRecoilValue(modalAtom);
+  if (!data) return;
+  const {
+    user,
+    urls,
+    likes,
+    profile_image,
+    alt_description: alt,
+  } = data as ImageDataType;
   const router = useRouter();
+  const qualityOptions = Object.keys(urls);
 
-  const navigateToSignUp = () => {
-    closeModal();
-    router.push('/signup');
+  const handleDownload = (option: ImageDataType['urls']) => {
+    const imageUrl = urls.raw;
+
+    fetch(imageUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error('Network res was not ok');
+        return res.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${alt}.jpg`);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode?.removeChild(link);
+      })
+      .catch((err) =>
+        console.error('Error fetching or downloading image:', err)
+      );
   };
 
   return (
@@ -43,84 +73,33 @@ export default function DetailModal({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 md:scale-90 max-md:translate-y-72"
             >
-              <Dialog.Panel className="flex flex-col space-y-4 w-screen md:w-full md:max-w-md transform overflow-hidden rounded-xl max-md:rounded-b-none bg-white/80 backdrop-blur p-6 text-left shadow-xl">
-                <Dialog.Title
-                  as="h2"
-                  className="text-lg md:text-xl text-center font-semibold leading-6 text-zinc-900"
-                >
-                  Welcome Back
-                </Dialog.Title>
-                <button
-                  type="button"
-                  className="text-white bg-[#e7484a] hover:bg-opacity-80 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center mx-auto duration-150 ease-out"
-                >
-                  <GoogleLogo />
-                  Sign in with Google
-                </button>
-                <Divider />
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-1 text-sm font-medium text-gray-900"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-1 text-sm font-medium text-gray-900"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                    placeholder="Enter your password"
-                  />
-                </div>
+              <Dialog.Panel className="flex flex-col space-y-4 w-screen md:w-full md:max-w-[90%] transform rounded-xl max-md:rounded-b-none bg-white backdrop-blur p-6 text-left shadow-xl">
                 <div className="w-full flex items-center justify-between">
-                  <div className="flex items-center mr-4">
-                    <input
-                      id="rememberId"
-                      type="checkbox"
-                      className="w-4 h-4 !text-teal-600 bg-gray-100 border-gray-300"
-                    />
-                    <label
-                      htmlFor="rememberId"
-                      className="ml-2 text-sm font-medium text-zinc-500"
-                    >
-                      Remember me
-                    </label>
-                  </div>
-                  <button className="font-medium text-sm text-blue-500 hover:text-blue-400 duration-150 ease-out">
-                    Forgot password?
-                  </button>
-                </div>
-                <button
-                  type="button"
-                  className="w-full text-white bg-blue-500 hover:bg-opacity-80 font-medium rounded-lg text-sm py-2.5 duration-150 ease-out"
-                >
-                  Sign in to your account
-                </button>
-                <div className="flex text-sm font-medium space-x-1">
-                  <span className="text-zinc-500">
-                    Don't have an account yet?
-                  </span>
-                  <button
-                    onClick={navigateToSignUp}
-                    className="text-blue-500 hover:text-blue-400 duration-150 ease-out"
+                  <Dialog.Title
+                    as="h2"
+                    className="text-lg md:text-xl font-semibold leading-6 text-zinc-900"
                   >
-                    Sign up here
-                  </button>
+                    {user.username}
+                  </Dialog.Title>
+                  <div className="flex items-center bg-[#3DB46E] hover:bg-opacity-80 rounded-lg">
+                    <button
+                      onClick={handleDownload}
+                      className="text-sm text-white pl-4 pr-3 py-2"
+                    >
+                      Download
+                    </button>
+                    <div className="w-px h-3.5 bg-white" />
+                    <Dropdown
+                      options={qualityOptions}
+                      handleOnDownload={handleDownload}
+                    />
+                  </div>
                 </div>
+                <img
+                  className="h-[50vh] object-contain"
+                  src={urls.full}
+                  alt={alt}
+                />
               </Dialog.Panel>
             </Transition.Child>
           </div>
