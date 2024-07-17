@@ -1,3 +1,5 @@
+import { useSetRecoilState } from 'recoil';
+import { modalAtom } from '../../recoil/atom';
 import EyeIcon from '../../svg/EyeIcon';
 import HeartIcon from '../../svg/HeartIcon';
 import { ImageDataType } from '../../types/type';
@@ -7,12 +9,24 @@ type Props = {
 };
 
 export default function ImageCard({ image }: Props) {
+  const setModal = useSetRecoilState(modalAtom);
   const { urls, likes, views, user, alt_description: alt } = image;
+
+  const openDetailModal = () => {
+    setModal({
+      isOpen: true,
+      type: 'detail',
+      data: image,
+    });
+  };
 
   if (!urls) return;
 
   return (
-    <div className="relative m-1 md:m-2 rounded-md group overflow-hidden cursor-pointer">
+    <div
+      onClick={openDetailModal}
+      className="relative m-1 md:m-2 rounded-md group overflow-hidden cursor-pointer"
+    >
       <img
         className="rounded-md group-hover:scale-105 duration-500 ease-out"
         loading="lazy"

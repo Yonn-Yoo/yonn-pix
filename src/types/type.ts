@@ -165,4 +165,6 @@ export interface Social {
 export type ModalType = {
   isOpen: boolean;
   type: 'login' | 'detail' | null;
+  imageData?: ImageDataType;
+  data: any;
 };

@@ -25,5 +25,6 @@ export const modalAtom = atom<ModalType>({
   default: {
     isOpen: false,
     type: null,
+    data: null,
   },
 });
