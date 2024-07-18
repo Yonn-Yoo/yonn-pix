@@ -89,7 +89,10 @@ export default function DetailModal({
                     />
                     <div className="flex flex-col -space-y-1">
                       <h2 className="text-lg md:text-xl capitalize font-semibold text-zinc-900">
-                        {user.first_name} {user.last_name} on Unsplash
+                        {user.first_name} {user.last_name}{' '}
+                        <strong className="font-normal text-zinc-500 text-sm md:text-base">
+                          on Unsplash
+                        </strong>
                       </h2>
                       <span className="text-sm text-slate-500">
                         {user.username}
@@ -122,19 +125,19 @@ export default function DetailModal({
                     <div className="flex flex-col">
                       <span className="lg:text-lg font-medium">Views</span>
                       <span className="text-slate-600">
-                        {views.toLocaleString()}
+                        {views?.toLocaleString() || 0}
                       </span>
                     </div>
                     <div className="flex flex-col">
                       <span className="lg:text-lg font-medium">Likes</span>
                       <span className="text-slate-600">
-                        {likes.toLocaleString()}
+                        {likes?.toLocaleString() || 0}
                       </span>
                     </div>
                     <div className="flex flex-col">
                       <span className="lg:text-lg font-medium">Downloads</span>
                       <span className="text-slate-600">
-                        {downloads.toLocaleString()}
+                        {downloads?.toLocaleString() || 0}
                       </span>
                     </div>
                   </div>

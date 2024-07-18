@@ -46,7 +46,7 @@ export default function ImageCard({ image }: Props) {
           <div className="flex items-center space-x-1">
             <EyeIcon />
             <span className="text-xs lg:text-sm">
-              {views?.toLocaleString()}
+              {views?.toLocaleString() || 0}
             </span>
           </div>
         </div>
