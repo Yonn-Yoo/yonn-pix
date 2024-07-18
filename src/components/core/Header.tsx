@@ -26,7 +26,7 @@ export default function Header() {
         </h4>
       </button>
       <SearchBar isHeader />
-      <button
+      {/* <button
         onClick={() =>
           setModal({
             isOpen: true,
@@ -38,7 +38,7 @@ export default function Header() {
         <span className="relative px-3 py-1 md:px-4 md:py-2 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
           Log in
         </span>
-      </button>
+      </button> */}
     </header>
   );
 }
