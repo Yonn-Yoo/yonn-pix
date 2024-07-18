@@ -89,7 +89,7 @@ export default function DetailModal({
                     />
                     <div className="flex flex-col -space-y-1">
                       <h2 className="text-lg md:text-xl capitalize font-semibold text-zinc-900">
-                        {user.first_name} {user.last_name}
+                        {user.first_name} {user.last_name} on Unsplash
                       </h2>
                       <span className="text-sm text-slate-500">
                         {user.username}
