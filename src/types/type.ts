@@ -169,3 +169,7 @@ export type ModalType = {
   imageData?: ImageDataType;
   data: any;
 };
+
+export type MapType = {
+  [key: string]: string;
+};

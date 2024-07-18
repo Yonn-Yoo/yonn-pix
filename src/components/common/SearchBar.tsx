@@ -18,9 +18,7 @@ export default function SearchBar({ isHeader }: { isHeader?: boolean }) {
     }
     setIsLoading(true);
     searchPhotos(searchCondition)
-      .then((res) =>
-        setImageList(res.data.results.map((image: any) => image.urls.small))
-      )
+      .then((res) => setImageList(res.data.results.map((image: any) => image)))
       .catch(console.log)
       .finally(() => setIsLoading(false));
   };

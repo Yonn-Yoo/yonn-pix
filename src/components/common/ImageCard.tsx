@@ -31,7 +31,7 @@ export default function ImageCard({ image }: Props) {
         className="rounded-md group-hover:scale-105 duration-500 ease-out"
         loading="lazy"
         draggable={false}
-        src={urls.small}
+        src={urls?.small}
         alt={alt}
       />
       <article className="absolute left-0 top-0 w-full h-full opacity-0 group-hover:opacity-100 bg-black/20 duration-300 ease-out">
@@ -46,7 +46,7 @@ export default function ImageCard({ image }: Props) {
           <div className="flex items-center space-x-1">
             <EyeIcon />
             <span className="text-xs lg:text-sm">
-              {views.toLocaleString()} views
+              {views?.toLocaleString()}
             </span>
           </div>
         </div>
