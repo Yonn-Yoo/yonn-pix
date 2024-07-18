@@ -84,18 +84,18 @@ export default function DetailModal({
                     <div
                       className="w-9 h-9 rounded-full"
                       style={{
-                        backgroundImage: `url(${user.profile_image.small})`,
+                        backgroundImage: `url(${user?.profile_image.small})`,
                       }}
                     />
                     <div className="flex flex-col -space-y-1">
                       <h2 className="text-lg md:text-xl capitalize font-semibold text-zinc-900">
-                        {user.first_name} {user.last_name}{' '}
+                        {user?.first_name} {user?.last_name}{' '}
                         <strong className="font-normal text-zinc-500 text-sm md:text-base">
                           on Unsplash
                         </strong>
                       </h2>
                       <span className="text-sm text-slate-500">
-                        {user.username}
+                        {user?.username}
                       </span>
                     </div>
                   </div>

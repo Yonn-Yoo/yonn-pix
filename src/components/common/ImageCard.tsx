@@ -37,7 +37,7 @@ export default function ImageCard({ image }: Props) {
       <article className="absolute left-0 top-0 w-full h-full opacity-0 group-hover:opacity-100 bg-black/20 duration-300 ease-out">
         <div className="relative w-full h-full flex flex-col items-end justify-between p-4 text-white/90">
           <div className="w-full flex justify-between items-center">
-            <span className="text-xs lg:text-sm">{user.username}</span>
+            <span className="text-xs lg:text-sm">{user?.username}</span>
             <div className="flex items-center space-x-1">
               <HeartIcon />
               <span className="text-xs lg:text-sm">{likes}</span>
