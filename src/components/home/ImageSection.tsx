@@ -62,9 +62,7 @@ function SearchOrderFilter({
     setIsLoading(true);
     searchPhotos(searchCondition)
       .then((res) =>
-        setImageList(
-          res.data.results.map((image: ImageDataType) => image.urls.small)
-        )
+        setImageList(res.data.results.map((image: ImageDataType) => image))
       )
       .catch(console.log)
       .finally(() => setIsLoading(false));
