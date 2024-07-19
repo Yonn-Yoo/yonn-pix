@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     setIsLoading(true);
     getRandomPhotos(50)
-      .then((res) => setImageList(res.data.map((image: any) => image)))
+      .then(setImageList)
       .catch(console.log)
       .finally(() => setIsLoading(false));
 

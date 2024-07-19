@@ -64,9 +64,7 @@ function SearchOrderFilter({
     }
     setIsLoading(true);
     searchPhotos(searchCondition)
-      .then((res) =>
-        setImageList(res.data.results.map((image: ImageDataType) => image))
-      )
+      .then(setImageList)
       .catch(console.log)
       .finally(() => setIsLoading(false));
   }, [searchCondition.order_by]);
