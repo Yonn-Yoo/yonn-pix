@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Dispatch, Fragment, SetStateAction, useEffect } from 'react';
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { searchPhotos } from '../../api/service';
@@ -22,7 +22,7 @@ export default function ImageSection({
 
   return (
     <section className="relative">
-      <SearchOrderFilter setImageList={setImageList} />
+      <SearchOrderFilter imageList={imageList} setImageList={setImageList} />
       {isLoading ? (
         <LoaderAnimation />
       ) : (
@@ -42,9 +42,12 @@ export default function ImageSection({
 
 function SearchOrderFilter({
   setImageList,
+  imageList,
 }: {
   setImageList: Dispatch<SetStateAction<ImageDataType[]>>;
+  imageList: ImageDataType[];
 }) {
+  const [isVisible, setIsVisible] = useState(false);
   const [searchCondition, setSearchCondition] = useRecoilState(searchFilter);
   const setIsLoading = useSetRecoilState(loader);
 
@@ -68,8 +71,18 @@ function SearchOrderFilter({
       .finally(() => setIsLoading(false));
   }, [searchCondition.order_by]);
 
+  useEffect(() => {
+    searchCondition.query ? setIsVisible(true) : setIsVisible(false);
+  }, [imageList]);
+
   return (
-    <div className="absolute right-2 -top-7">
+    <div
+      className={`absolute right-2 -top-7 z-10 ${
+        isVisible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 -translate-y-5 pointer-events-none'
+      } duration-300 ease-out`}
+    >
       <Menu as="div" className="w-fit relative text-right mb-5 md:mb-10">
         <div className="flex space-x-1 text-sm">
           <span className="font-light text-zinc-500">Order images by</span>
