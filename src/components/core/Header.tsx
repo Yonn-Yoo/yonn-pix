@@ -26,19 +26,11 @@ export default function Header() {
         </h4>
       </button>
       <SearchBar isHeader />
-      {/* <button
-        onClick={() =>
-          setModal({
-            isOpen: true,
-            type: 'login',
-          })
-        }
-        className="relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white focus:ring-0"
-      >
+      <button className="invisible pointer-events-none relative inline-flex items-center justify-center p-0.5 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 hover:text-white focus:ring-0">
         <span className="relative px-3 py-1 md:px-4 md:py-2 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
           Log in
         </span>
-      </button> */}
+      </button>
     </header>
   );
 }
